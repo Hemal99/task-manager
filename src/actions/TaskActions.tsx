@@ -14,7 +14,7 @@ export const addTask = (task: ITaskItem): ITaskAction => ({
 
 // for editing a task we need task id and updates.
 // So payload should be id and updates
-export const editTask = (id: string, updates: ITaskItem): ITaskAction => ({
+export const editTask = (id: any, updates: ITaskItem): ITaskAction => ({
   type: ActionTypes.Edit,
   id,
   updates,
@@ -22,7 +22,7 @@ export const editTask = (id: string, updates: ITaskItem): ITaskAction => ({
 
 // for editing a task we just need task the id of desired task.
 // So payload should be id
-export const removeTask = (id: string): ITaskAction => ({
+export const removeTask = (id: any): ITaskAction => ({
   type: ActionTypes.Delete,
   id,
 });
