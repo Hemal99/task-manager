@@ -2,6 +2,7 @@ import React from 'react';
 import TasksList from "../Task/TaskList";
 import { globalStyles } from "../../styles/globalStyles"
 import AddTask from '../Task/AddTask';
+import { Colors } from '../../consts';
 
 
 const Home = () => {
@@ -15,7 +16,13 @@ const Home = () => {
     <main className={classes.content}>
       <div className={classes.drawerHeader} />
       <AddTask />
-      <TasksList />
+      <div style={{backgroundColor:Colors.lightBlue,padding:20,borderRadius:10}}>
+       
+   
+        <TasksList />
+
+      
+      </div>
     </main>
   )
 };

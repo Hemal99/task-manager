@@ -15,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Link } from "react-router-dom";
 
 // custom styles of this component
 const useStyles = makeStyles((theme: Theme) =>
@@ -225,16 +226,26 @@ const TaskForm: React.FC<IComponentProps> = (props) => {
             + Add{" "}
           </Button>
         ) : (
-          <Button
-            size="small"
-            variant="contained"
-            color="primary"
-            type="submit"
-            fullWidth
-          >
-            {" "}
-            Edit Task{" "}
-          </Button>
+          <>
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              {" "}
+              Edit Task{" "}
+            </Button>
+            <Button
+              size="small"
+              variant="contained"
+              component={Link}
+              to="/"
+              className={classes.floatRight}
+            >
+              Cancel
+            </Button>
+          </>
         )}
 
         {/* 

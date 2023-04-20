@@ -75,8 +75,6 @@ const TasksList: React.FC = () => {
   // we retrieved the state from our Context
   const { state } = useContext(Context);
 
-  console.log("state", state);
-
   // in dashboard page we have 2 filter (filter by text) and (filter by status)
   // we need 2 states to handle this filter
   // then in order to use filterTasks(state, filter: IFilterTask) we define a filer
