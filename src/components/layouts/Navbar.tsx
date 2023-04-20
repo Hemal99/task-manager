@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 // import IconButton from "@mui/material/IconButton";
 // import MenuIcon from "@mui/icons-material/Menu";
+import { Colors } from "../../consts/index";
 
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +15,7 @@ export default function ButtonAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" style={{ backgroundColor: "#0276aa" }}>
+      <AppBar position="fixed" style={{ backgroundColor: Colors.blue }}>
         <Toolbar>
           {/* <IconButton
               size="large"
@@ -32,7 +33,6 @@ export default function ButtonAppBar() {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                marginTop: "8px",
               }}
             >
               Task Management
