@@ -16,6 +16,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Typography } from "@mui/material";
 
 // custom styles of this component
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,6 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     floatRight: {
       float: "right",
+    },
+    historyText: {
+      marginTop: 5,
+      marginBottom: 5,
     },
   })
 );
@@ -180,31 +185,30 @@ const TaskForm: React.FC<IComponentProps> = (props) => {
           style={{ marginBottom: 30 }}
         />
 
-        <FormControl fullWidth variant="filled" sx={{ mb: 5, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
-          <Select
-            labelId="demo-simple-select-filled-label"
-            id="demo-simple-select-filled"
-            value={status}
-            onChange={handleChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={TaskHistory.Todo}>{TaskHistory.Todo}</MenuItem>
-            <MenuItem value={TaskHistory.InProgress}>
-              {TaskHistory.InProgress}
-            </MenuItem>
-            <MenuItem value={TaskHistory.InQA}>{TaskHistory.InQA}</MenuItem>
-            <MenuItem value={TaskHistory.Done}>{TaskHistory.Done}</MenuItem>
-            <MenuItem value={TaskHistory.Deployed}>
-              {TaskHistory.Deployed}
-            </MenuItem>
-            <MenuItem value={TaskHistory.Blocked}>
-              {TaskHistory.Blocked}
-            </MenuItem>
-          </Select>
-        </FormControl>
+        {mode === TaskFormMode.Create && (
+          <FormControl fullWidth variant="filled" sx={{ mb: 5, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-filled-label">Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-filled-label"
+              id="demo-simple-select-filled"
+              value={status}
+              onChange={handleChange}
+            >
+              <MenuItem value={TaskHistory.Todo}>{TaskHistory.Todo}</MenuItem>
+              <MenuItem value={TaskHistory.InProgress}>
+                {TaskHistory.InProgress}
+              </MenuItem>
+              <MenuItem value={TaskHistory.InQA}>{TaskHistory.InQA}</MenuItem>
+              <MenuItem value={TaskHistory.Done}>{TaskHistory.Done}</MenuItem>
+              <MenuItem value={TaskHistory.Deployed}>
+                {TaskHistory.Deployed}
+              </MenuItem>
+              <MenuItem value={TaskHistory.Blocked}>
+                {TaskHistory.Blocked}
+              </MenuItem>
+            </Select>
+          </FormControl>
+        )}
 
         {/* 
                     bases on mode (EDIT or ADD) we trigger the select element
@@ -212,13 +216,19 @@ const TaskForm: React.FC<IComponentProps> = (props) => {
                     it will be filled by task history which we got from our useHistoryHook                    
                 */}
 
-        {/* {mode === TaskFormMode.Edit ?
-                    <select value={status} onChange={onStatusChange} className={classes.select} >
-                        {taskHistoryBasedStatus.map((status: string, index) => (<option key={index}>{status}</option>))}
-                    </select>
-                    :
-                    undefined
-                } */}
+        {mode === TaskFormMode.Edit ? (
+          <>
+            <select
+              value={status}
+              onChange={onStatusChange}
+              className={classes.select}
+            >
+              {taskHistoryBasedStatus.map((status: string, index) => (
+                <option key={index}>{status}</option>
+              ))}
+            </select>
+          </>
+        ) : undefined}
 
         {/* 
                     bases on mode (EDIT or ADD) we will show different buttons with different text
