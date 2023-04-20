@@ -36,16 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// in this component we use id param to edit a taask
-// TS doesn't know any thing about this tyype
-// we should define an interface to define our id type
-// type for `match.params`
-// must be type `string` since value comes from the URL
-// then it will pass to RouteComponentProps Component
-interface RouterProps {
-  id: string;
-}
-
 // this Componet helps to Edit a task based in ID of task
 const EditTask: React.FC = () => {
   // define classes as a const filled bu useSyles of Material UI

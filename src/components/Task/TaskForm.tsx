@@ -1,5 +1,4 @@
 import React, { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
 import { nanoid } from "nanoid";
 import { Theme } from "@mui/material/styles";
 import { makeStyles, createStyles } from "@mui/styles";
@@ -16,7 +15,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Typography } from "@mui/material";
 
 // custom styles of this component
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,12 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// defining custom interface for our components
-// task is optional. WHY?
-// because we call TaskForm component in 2 different situation:
-// 1. for edit a task. in this situation task will pass to this component for editing
-// 2. for add a new task. in this situation we dont need task to be passed.
-// but both of them will pass a onsubmit. one for edit and one for add
 interface IComponentProps {
   task?: ITaskItem | undefined;
   onSubmit: (task: ITaskItem) => void;
@@ -81,10 +73,6 @@ const TaskForm: React.FC<IComponentProps> = (props) => {
     props.task ? props.task.description : ""
   );
 
-  // when we will edit a task we need a hisory
-  // this history will be generated bu useHistory hook.
-  // then we can fill the select element by its returned array
-  // and we will be able to find the next and prev state of current status of Task
   const taskHistoryBasedStatus = useTaskHistory(status);
 
   // handler for chaning title
@@ -109,21 +97,13 @@ const TaskForm: React.FC<IComponentProps> = (props) => {
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
 
-    // first we will check the title and description.
-    // if it is empty we send a pessate to user
     if (title.trim() === "" || description.trim() === "") {
       setError("'Please fill Title and Description.'");
     } else {
-      // when title and description are not empty
-      // we first clear error.
-      // and then check the mode.
-      // and based on mode we will send different submit parameters
       setError("");
 
       if (mode === TaskFormMode.Create) {
         props.onSubmit({
-          // we use nanoid library to create a unique id in case of adding a new item
-          // this unique id will be used for editing and other purposes
           id: nanoid(8),
           title,
           description,
